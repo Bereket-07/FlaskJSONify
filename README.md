@@ -1,6 +1,6 @@
 # AI Assistant Bot
 
-![AI Assistant Bot](./images/ai-assistant-bot-banner.png)
+![AI Assistant Bot](./images/ai-assistant-bot-banner.jpg)
 
 ## Introduction
 
@@ -54,7 +54,7 @@ Follow these steps to install the AI Assistant Bot:
 4. **Ask Questions**
     Interact with the bot by asking questions about the data and receive informed answers.
 
-![Usage](./images/features.png)
+![Usage](./images/features.jpg)
 
 ## Contributing
 
@@ -66,7 +66,7 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 ---
 
-![AI Assistant](./images/ai-assistant.png)
+![AI Assistant](./images/ai-assistant-bot-banner.png)
 
 
 
