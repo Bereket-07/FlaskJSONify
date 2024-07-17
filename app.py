@@ -1,10 +1,11 @@
 import os
-from flask import request , Flask , jsonify, session
+from flask import render_template, request , Flask , jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from models import db , Question,Questionares,Choices,Answers
 from services import get_users , get_by_questioner_id
 from flask_session import Session
+from main import process_data, chat_with_groq
 
 # load environment variables
 load_dotenv()
@@ -37,6 +38,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
 db.init_app(app)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/users', methods=['GET'])
 def get_usersRoute():
     return get_users()
@@ -44,7 +49,16 @@ def get_usersRoute():
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_data_using_questioner_id(user_id):
     return get_by_questioner_id(user_id)
-
-
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json.get('message')
+    # Assuming you have some way to get the user_id, e.g., from session or request
+    user_id = 1
+    processed_data = process_data(user_id)
+    if not processed_data:
+        return jsonify({"error": "Failed to fetch data"}), 400
+    
+    chat_response = chat_with_groq(processed_data, user_message)
+    return jsonify({"response": chat_response})
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5000)
